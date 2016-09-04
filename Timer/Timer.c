@@ -9,13 +9,17 @@ int main(){
 	printf("\nYou choose %d\n",min);
 
 	clock_t t;
-	t = clock()/10^12;
+	t = clock();
 	long counter = 0;
-	while((clock()/10^12) - t < min*60){
-		clock_t current = (clock()/10^12) - t;
-		if (current - counter >= 1) {
-			printf("%lu \n", current);
-			counter = clock()/10^12;
+	while(clock() - t < min*60000000){
+		clock_t current = clock() - t;
+		if (current - counter >= 1000000) {
+			int remaining = (min*60)-(current/1000000);	
+			printf("Remaining Time: %d",(remaining/600)%10);
+			printf("%d:",(remaining/60)%10);
+			printf("%d",(remaining/10%6));
+			printf("%d\n",(remaining%10));
+			counter = clock();
 		}
 	}
 	printf("You meal is ready\n");
