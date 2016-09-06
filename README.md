@@ -14,6 +14,6 @@
 	Cpp - Reading about Libraries. <br />
 
 -06/09/2016
-	Cpp - headers, call external functions; <br />
-	Timer to Cpp <br />
+	<iostream> - namespace, cin and cout; <br />
+	Timer using <iostream> <br />
 	
