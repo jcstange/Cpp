@@ -13,10 +13,11 @@
 	Raspberry Pi - Install Kodi image and boot; <br />
 	Cpp - Reading about Libraries. <br />
 
--06/09/2016
+-06/09/2016 -<br />
 	<iostream> - namespace, cin and cout; <br />
 	Timer using <iostream> <br />
 
--07/09/2016
-	TimerCpp using system Buzzer in countdown from 10 to 0 and End alert.
-	
+-07/09/2016 <br />
+	TimerCpp using system Buzzer in countdown from 10 to 0 and End alert.<br />
+	Including Mathgame
+		
