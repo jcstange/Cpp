@@ -19,6 +19,7 @@ int main(){
 			printf("%d:",(remaining/60)%10);
 			printf("%d",(remaining/10%6));
 			printf("%d\n",(remaining%10));
+			printf("\a");
 			counter = clock();
 		}
 	}
