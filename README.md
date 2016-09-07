@@ -16,4 +16,7 @@
 -06/09/2016
 	<iostream> - namespace, cin and cout; <br />
 	Timer using <iostream> <br />
+
+-07/09/2016
+	TimerCpp using system Buzzer in countdown from 10 to 0 and End alert.
 	
