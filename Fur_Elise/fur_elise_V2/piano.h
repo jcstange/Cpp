@@ -59,5 +59,3 @@ void Piano::beep(int freq,int len){
         ioctl(fd, KIOCSOUND, 0);
         close(fd);
 }
-
-
