@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -39,22 +40,37 @@ int main(){
 		cout << "Welcome to this math game\n" << endl;
 		int gamepoint(0);
 		while (question < 11){
-			int x = rand()%100;
-			int y = rand()%100;
-			int z = rand()%3;
-			int answer(0);
-			cout << "Question #" 
-		     	     <<  question
-		             << ": " 
-		     	     << x
-			     << " "
-			    // << z
-			     << "+ "
- 			     << y
-			     << " = "
-			     << endl;
-			cin >> answer;
-			if (answer == x + y){
+			srand(time(0));
+			int x = rand()%10;
+			int y = rand()%10;
+			int z = rand()%4;
+			float ranswer(0);
+			float uanswer(0);
+			cout << "Question #"
+                             <<  question
+                             << ": ";
+
+			switch (z) {
+				case 0:
+					cout << x << " + " << y << " = ";
+					ranswer = x+y;
+					break;
+				case 1:
+					cout << x << " - " << y << " = ";
+					ranswer = x-y;
+					break;
+				case 2: 
+					cout << x << " * " << y << " = ";
+					ranswer = x*y;
+					break;
+				case 3: 
+					cout << x << " / " << y << " = ";
+					ranswer = x/y;
+					break;
+			} 
+			cin >> uanswer;
+			cout << endl;
+			if (uanswer == ranswer){
 				gamepoint = gamepoint + 10;
 				cout << "You are right!" << endl;
 			} else cout << "You are wrong!" << endl;
