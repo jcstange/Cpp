@@ -5,6 +5,7 @@ using namespace std;
 class Stack {
 	int base[100];
 	int top=0;
+	int *stack = new int[top];
 	public:
 	void Printstack();
 	void Pop();
@@ -14,14 +15,17 @@ class Stack {
 
 void Stack::Printstack(){
 	for(int i=0; i<top; i++){
-		cout << base[(top-1)-i] << endl;
+		cout << stack[(top-1)-i] << endl;
 	}
 }
 void Stack::Pop(){
 	if(top>0){	
 		top--;
 		for(int i=0; i<top; i++){
-			cout << base[(top-1)-i] << endl;
+			stack[i]=base[i];
+		}
+		for(int i=0; i<top; i++){			
+			cout << stack[(top-1)-i] << endl;
 		}
 	} else cout << "Stack is empty!" << endl;
 }
@@ -29,13 +33,17 @@ void Stack::Push(int elem){
 	top++;
 	base[top-1] = elem;
 	for(int i=0; i<top; i++){
-		cout << base[(top-1)-i] << endl;
+		stack[i]=base[i];
+	}
 
+	for(int i=0; i<top; i++){			
+		cout << stack[(top-1)-i] << endl;
 	}
 }
 
+
 int Stack::Size(){
-	return top;
+	return top ;
 }
 
 
