@@ -3,24 +3,49 @@
 #include <vector>
 #include <sstream>
 #include <ctime>
+#include <fstream>
 
 using namespace std;
 
 class Character {
 public:
-	string name;
+	std::string name;
 	int attack;
 	int defense;
 	int hitpoints;
 	int xp;
 	int level;
+	int goblin;
+	int orc;
+	int gargoyle;
+	int troll;
+	int dragon;
 
 	Character() {
+		name = "";
 		attack = 0;
 		defense = 0;
 		hitpoints = 0;
 		xp = 0;
 		level = 1;
+		goblin = 0;
+		orc = 0;
+		gargoyle = 0;
+		troll = 0;
+		dragon = 0;
+	};
+	Character(string na, int at, int de, int hi, int x, int le, int go, int or, int ga, int tr, int dr) {
+		name = na;
+		attack = at;
+		defense = de;
+		hitpoints = hi;
+		xp = x;
+		level = le;
+		goblin = go;
+		orc = or;
+		gargoyle = ga;
+		troll = tr;
+		dragon = dr;
 	};
 	~Character() {
 		std::cout << "Character was erased" << endl;
@@ -54,7 +79,7 @@ public:
 };
 
 void Character::Update_character() {
-	int skill_points = level * 50;
+	int skill_points = 100 + 25*level;
 	int skill_option = 0;
 	hitpoints += 250;
 	int add_attack = 0;
@@ -117,6 +142,7 @@ void Character::level_control() {
 	int xp_to_next = xp_to_level[level] - xp;
 	cout << "XP to next level: " << xp_to_next << endl;
 
+
 	if (xp_to_next<=0) {
 		cout << "Level Up!" << endl;
 		++level;
@@ -126,7 +152,7 @@ void Character::level_control() {
 
 }
 
-void Gamestart() {
+bool Gamestart() {
 	int option = 0;
 	cout << "Welcome to Warrior vs. Monster RPG" << endl;
 	cout << "1) New Game " << endl;
@@ -135,10 +161,11 @@ void Gamestart() {
 
 	switch (option) {
 	case 1:
+		return false;
 		break;
 	case 2:
-		cout << "No saved games" << endl;
-		Gamestart();
+		cout << "Loading Game" << endl;
+		return true;
 		break;
 	default:
 		cout << "Invalid Option" << endl;
@@ -147,13 +174,27 @@ void Gamestart() {
 	}
 }
 
-int main()
-{
-	Gamestart();
-	Character a;
-	Character *ptr = &a;
-	a.Update_character();
+int main() {
+	std::string name;
+	int attack=0;
+	int defense=0;
+	int hitpoints=0;
+	int xp=0;
+	int level=1;
+	int goblin=0;
+	int orc=0;
+	int gargoyle=0;
+	int troll=0;
+	int dragon=0;
+	bool start = Gamestart();
+	if (start) {
+		ifstream saved("saved.txt");
+		saved >> name >> attack >> defense >>  hitpoints >> xp >> level >> goblin >> orc >> gargoyle  >> troll >> dragon;
+	}
 	srand(time(0));
+	Character a(name, attack, defense, hitpoints, xp, level, goblin, orc, gargoyle, troll, dragon);
+	Character *ptr = &a;
+	if (!start) a.Update_character();
 	bool game = 1;
 	do {
 	chose:
@@ -276,8 +317,22 @@ int main()
 			cout << a.name << " won " << monster.give_xp << " xp points" << endl;
 			cout << "Now has " << a.xp << " and is on " << a.level << " level" << endl;
 			a.hitpoints += to_recover;
-			system("pause");
+			cout << a.name << " has " << a.hitpoints << " hit points" << endl;
+			system("pause");			
+			if (monster.name == "Goblin")  a.goblin++;
+			else if (monster.name == "Orc") a.orc++;
+			else if (monster.name == "Gargoyle") a.gargoyle++;
+			else if (monster.name == "Troll") a.troll++;
+			else if (monster.name == "Dragon") a.dragon++;
+			cout << a.name << " killed " << a.goblin << " Goblins" << endl;
+			cout << a.name << " killed " << a.orc << " Orcs" << endl;
+			cout << a.name << " killed " << a.gargoyle << " Gargoyles" << endl;
+			cout << a.name << " killed " << a.troll << " Trolls" << endl;
+			cout << a.name << " killed " << a.dragon << " Dragons" << endl;
 			monster.~Monster();
+			ofstream saved("saved.txt", std::ofstream::trunc);
+			saved << ptr->name << " " << ptr->attack << " " << ptr->defense << " " << ptr->hitpoints << " " << ptr->xp << " " << ptr->level << " " << ptr->goblin << " " << ptr->orc << " " << ptr->gargoyle << " " << ptr->troll << " " << ptr->dragon;
+			saved.close();
 			a.level_control();
 		}
 		else {
