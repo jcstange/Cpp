@@ -34,7 +34,7 @@ public:
 		troll = 0;
 		dragon = 0;
 	};
-	Character(string na, int at, int de, int hi, int x, int le, int go, int or, int ga, int tr, int dr) {
+	Character(string na, int at, int de, int hi, int x, int le, int go, int oc, int ga, int tr, int dr) {
 		name = na;
 		attack = at;
 		defense = de;
@@ -42,7 +42,7 @@ public:
 		xp = x;
 		level = le;
 		goblin = go;
-		orc = or;
+		orc = oc;
 		gargoyle = ga;
 		troll = tr;
 		dragon = dr;
@@ -268,7 +268,8 @@ int main() {
 		}
 		Monster monster(monster_name, attack, defense, hitpoints, give_xp);
 		cout << monster.name << " is waiting for you to fight" << endl;
-		system("pause");
+		std::cout << "Press enter to continue ...";
+		std::cin.get();
 		float char_to_hit = 20 - (10 + (a.attack / monster.defense));
 		float mons_to_hit = 20 - (10 + (monster.attack / a.defense));
 		cout << "Initiative: ";
@@ -279,7 +280,8 @@ int main() {
 		string winner = "";
 		init1 > init2 ? winner = a.name : winner = monster.name;
 		cout << winner << " won" << endl;
-		system("pause");
+		std::cout << "Press enter to continue ...";
+		std::cin.get();
 		bool start = false;
 		if (winner == a.name) start = true;
 		else start = false;
@@ -307,7 +309,8 @@ int main() {
 				else cout << monster.name << " missed" << endl;
 				start = !start;
 			}
-			system("pause");
+			std::cout << "Press enter to continue ...";
+			std::cin.get();
 		}
 		cout << "End of the fight" << endl;
 		a.hitpoints > monster.hitpoints ? winner = a.name : winner = monster.name;
@@ -340,7 +343,8 @@ int main() {
 			cout << "GAME OVER" << endl;
 			a.~Character();
 			game = 0;
-			system("pause");
+			std::cout << "Press enter to continue ...";
+			std::cin.get();
 		}
 	} while (game);
 
